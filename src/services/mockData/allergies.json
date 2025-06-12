@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "datetime": "2024-01-14T08:30:00Z",
+    "trigger": "pollen",
+    "symptoms": ["sneezing", "runny nose", "itchy eyes"],
+    "remedies": ["antihistamine", "nasal spray", "eye drops"]
+  },
+  {
+    "id": "2",
+    "datetime": "2024-01-10T12:15:00Z",
+    "trigger": "dust mites",
+    "symptoms": ["congestion", "coughing", "throat irritation"],
+    "remedies": ["air purifier", "saline rinse", "steam inhalation"]
+  },
+  {
+    "id": "3",
+    "datetime": "2024-01-07T19:45:00Z",
+    "trigger": "shellfish",
+    "symptoms": ["hives", "swelling", "difficulty breathing"],
+    "remedies": ["epinephrine", "antihistamine", "emergency room visit"]
+  },
+  {
+    "id": "4",
+    "datetime": "2024-01-03T14:20:00Z",
+    "trigger": "pet dander",
+    "symptoms": ["sneezing", "watery eyes", "skin rash"],
+    "remedies": ["shower", "change clothes", "antihistamine"]
+  },
+  {
+    "id": "5",
+    "datetime": "2023-12-28T16:10:00Z",
+    "trigger": "mold",
+    "symptoms": ["headache", "fatigue", "respiratory issues"],
+    "remedies": ["removed from environment", "fresh air", "rest"]
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "date": "2024-01-15",
+    "topics": ["anxiety management", "work stress", "coping strategies"],
+    "reflection": "Dr. Smith introduced me to a new breathing technique that really helped during our session. We talked about identifying triggers at work and how to respond differently. I feel more equipped to handle stressful situations now. Planning to practice the 4-7-8 breathing method daily.",
+    "timestamp": "2024-01-15T15:00:00Z"
+  },
+  {
+    "id": "2",
+    "date": "2024-01-08",
+    "topics": ["family relationships", "communication skills", "boundary setting"],
+    "reflection": "Had a breakthrough moment discussing my relationship with my parents. Realized I've been taking on too much responsibility for their emotions. Dr. Smith helped me understand that setting boundaries isn't selfish - it's necessary for my mental health. Going to try having a conversation with them this week.",
+    "timestamp": "2024-01-08T15:00:00Z"
+  },
+  {
+    "id": "3",
+    "date": "2024-01-01",
+    "topics": ["goal setting", "self-compassion", "new year intentions"],
+    "reflection": "Started the year with a focus on being kinder to myself. We discussed how my inner critic has been particularly harsh lately. Created a list of realistic goals rather than overwhelming resolutions. The concept of 'good enough' really resonated with me today.",
+    "timestamp": "2024-01-01T14:30:00Z"
+  },
+  {
+    "id": "4",
+    "date": "2023-12-25",
+    "topics": ["holiday stress", "family dynamics", "mindfulness"],
+    "reflection": "Christmas was challenging but I used the mindfulness techniques we've been practicing. When things got overwhelming at dinner, I excused myself for a few minutes of deep breathing. It made such a difference in how I handled the rest of the evening.",
+    "timestamp": "2023-12-25T16:00:00Z"
+  }
+]
