@@ -1,8 +1,11 @@
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import ApperIcon from '../components/ApperIcon';
+import ApperIcon from '@/components/ApperIcon';
+import Button from '@/components/atoms/Button';
+import Text from '@/components/atoms/Text';
 
-const NotFound = () => {
+const NotFoundPage = () => {
   const navigate = useNavigate();
 
   return (
@@ -19,37 +22,40 @@ const NotFound = () => {
         >
           <ApperIcon name="Compass" className="w-24 h-24 text-primary mx-auto" />
         </motion.div>
-        
-        <h1 className="text-4xl font-heading font-bold text-gray-800 mb-4">
+
+        <Text as="h1" className="text-4xl font-heading font-bold text-gray-800 mb-4">
           Page Not Found
-        </h1>
-        
-        <p className="text-gray-600 mb-8">
+        </Text>
+
+        <Text as="p" className="text-gray-600 mb-8">
           The page you're looking for doesn't exist or has been moved.
-        </p>
-        
+        </Text>
+
         <div className="space-y-4">
-          <motion.button
+          <Button
             onClick={() => navigate('/')}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="w-full bg-primary text-white py-3 px-6 rounded-lg font-medium hover:bg-primary/90 transition-colors"
+            className="w-full"
+            size="large"
           >
             Go to Dashboard
-          </motion.button>
-          
-          <motion.button
+          </Button>
+
+          <Button
             onClick={() => navigate(-1)}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="w-full border border-gray-300 text-gray-700 py-3 px-6 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+            className="w-full"
+            variant="outline"
+            size="large"
           >
             Go Back
-          </motion.button>
+          </Button>
         </div>
       </motion.div>
     </div>
   );
 };
 
-export default NotFound;
+export default NotFoundPage;
