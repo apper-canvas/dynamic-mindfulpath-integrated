@@ -51,12 +51,27 @@ export const getRecentEpisodes = async (limit = 5) => {
   return recent.map(episode => ({ ...episode }));
 };
 
+// Memoized trigger frequency calculation
+let triggerFrequencyCache = null;
+let triggerCacheTimestamp = 0;
+
 export const getTriggerFrequency = async () => {
   await delay(300);
+  
+  const now = Date.now();
+  // Cache for 5 minutes or if data length changed
+  if (triggerFrequencyCache && (now - triggerCacheTimestamp < 300000)) {
+    return { ...triggerFrequencyCache };
+  }
+  
   const triggerCount = {};
-  data.forEach(episode => {
+  for (const episode of data) {
     const trigger = episode.trigger;
     triggerCount[trigger] = (triggerCount[trigger] || 0) + 1;
-  });
-  return triggerCount;
+  }
+  
+  triggerFrequencyCache = triggerCount;
+  triggerCacheTimestamp = now;
+  
+  return { ...triggerCount };
 };

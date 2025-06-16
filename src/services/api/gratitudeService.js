@@ -51,24 +51,45 @@ export const getTodaysEntry = async () => {
   return entry ? { ...entry } : null;
 };
 
+// Optimized streak calculation with caching
+let streakCache = null;
+let streakCacheLength = 0;
+
 export const getCurrentStreak = async () => {
   await delay(250);
-  const sortedEntries = [...data].sort((a, b) => new Date(b.date) - new Date(a.date));
+  
+  // Return cached result if data hasn't changed
+  if (streakCache !== null && streakCacheLength === data.length) {
+    return streakCache;
+  }
+  
+  if (data.length === 0) {
+    streakCache = 0;
+    streakCacheLength = 0;
+    return 0;
+  }
+  
+  const sortedEntries = data
+    .map(entry => ({ ...entry, dateTime: new Date(entry.date).getTime() }))
+    .sort((a, b) => b.dateTime - a.dateTime);
   
   let streak = 0;
-  let currentDate = new Date();
+  let currentTime = Date.now();
+  const oneDayMs = 24 * 60 * 60 * 1000;
   
   for (const entry of sortedEntries) {
-    const entryDate = new Date(entry.date);
-    const daysDiff = Math.floor((currentDate - entryDate) / (1000 * 60 * 60 * 24));
+    const daysDiff = Math.floor((currentTime - entry.dateTime) / oneDayMs);
     
     if (daysDiff === streak) {
       streak++;
-      currentDate.setDate(currentDate.getDate() - 1);
+      currentTime -= oneDayMs;
     } else {
       break;
     }
   }
+  
+  streakCache = streak;
+  streakCacheLength = data.length;
   
   return streak;
 };

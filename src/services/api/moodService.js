@@ -51,26 +51,50 @@ export const getTodaysEntry = async () => {
   return entry ? { ...entry } : null;
 };
 
+// Cache for date range calculations
+const moodDateCache = new Map();
+
+const getCachedDateRange = (type) => {
+  if (moodDateCache.has(type)) {
+    return moodDateCache.get(type);
+  }
+  
+  const date = new Date();
+  let timestamp;
+  
+  if (type === 'week') {
+    date.setDate(date.getDate() - 7);
+    timestamp = date.getTime();
+  } else if (type === 'month') {
+    date.setMonth(date.getMonth() - 1);
+    timestamp = date.getTime();
+  }
+  
+  moodDateCache.set(type, timestamp);
+  // Clear cache after 1 hour
+  setTimeout(() => moodDateCache.delete(type), 3600000);
+  
+  return timestamp;
+};
+
 export const getWeeklyTrends = async () => {
   await delay(300);
-  const oneWeekAgo = new Date();
-  oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+  const oneWeekAgoTime = getCachedDateRange('week');
   
-  const weeklyData = data.filter(entry => 
-    new Date(entry.date) >= oneWeekAgo
-  ).sort((a, b) => new Date(a.date) - new Date(b.date));
+  const weeklyData = data
+    .filter(entry => new Date(entry.date).getTime() >= oneWeekAgoTime)
+    .sort((a, b) => new Date(a.date) - new Date(b.date));
   
   return weeklyData.map(entry => ({ ...entry }));
 };
 
 export const getMonthlyTrends = async () => {
   await delay(400);
-  const oneMonthAgo = new Date();
-  oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+  const oneMonthAgoTime = getCachedDateRange('month');
   
-  const monthlyData = data.filter(entry => 
-    new Date(entry.date) >= oneMonthAgo
-  ).sort((a, b) => new Date(a.date) - new Date(b.date));
+  const monthlyData = data
+    .filter(entry => new Date(entry.date).getTime() >= oneMonthAgoTime)
+    .sort((a, b) => new Date(a.date) - new Date(b.date));
   
   return monthlyData.map(entry => ({ ...entry }));
 };

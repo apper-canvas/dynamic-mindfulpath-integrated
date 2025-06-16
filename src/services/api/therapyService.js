@@ -52,13 +52,30 @@ export const getRecentSessions = async (limit = 5) => {
   return recent.map(session => ({ ...session }));
 };
 
+// Memoized topic frequency with caching
+let topicFrequencyCache = null;
+let topicCacheLength = 0;
+
 export const getTopicFrequency = async () => {
   await delay(300);
+  
+  // Return cached result if data hasn't changed
+  if (topicFrequencyCache && topicCacheLength === data.length) {
+    return { ...topicFrequencyCache };
+  }
+  
   const topicCount = {};
-  data.forEach(session => {
-    session.topics?.forEach(topic => {
-      topicCount[topic] = (topicCount[topic] || 0) + 1;
-    });
-  });
-  return topicCount;
+  
+  for (const session of data) {
+    if (session.topics?.length) {
+      for (const topic of session.topics) {
+        topicCount[topic] = (topicCount[topic] || 0) + 1;
+      }
+    }
+  }
+  
+  topicFrequencyCache = topicCount;
+  topicCacheLength = data.length;
+  
+  return { ...topicCount };
 };
